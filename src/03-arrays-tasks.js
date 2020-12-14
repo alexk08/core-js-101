@@ -308,7 +308,7 @@ function get3TopItems(arr) {
  *   [ 1, '2' ] => 1
  */
 function getPositivesCount(arr) {
-  return arr.reduce(((accumulator, current) => (Number(current) > 0
+  return arr.reduce(((accumulator, current) => (current > 0 && typeof current === 'number'
     ? accumulator + 1 : accumulator)), 0);
 }
 
