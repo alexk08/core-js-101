@@ -36,8 +36,9 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  const arr = Array.from(Array(len * 2).keys());
-  return arr.filter((item) => item % 2 === 1);
+  return Array.from(Array(len)).map((item, i) => (2 * i + 1));
+  // const arr = Array.from(Array(len * 2).keys());
+  // return arr.filter((item) => item % 2 === 1);
 }
 
 
@@ -288,8 +289,8 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  return arr.reverse().slice(0, 3);
 }
 
 
@@ -306,8 +307,9 @@ function get3TopItems(/* arr */) {
  *   [ null, 1, 'elephant' ] => 1
  *   [ 1, '2' ] => 1
  */
-function getPositivesCount(/* arr */) {
-  throw new Error('Not implemented');
+function getPositivesCount(arr) {
+  return arr.reduce(((accumulator, current) => (Number(current) > 0
+    ? accumulator + 1 : accumulator)), 0);
 }
 
 /**
@@ -373,8 +375,8 @@ function getFalsyValuesCount(/* arr */) {
  *    [ null, undefined, null ], null => 2
  *    [ true, 0, 1, 'true' ], true => 1
  */
-function findAllOccurences(/* arr, item */) {
-  throw new Error('Not implemented');
+function findAllOccurences(arr, item) {
+  return arr.reduce((accum, curr) => (curr === item ? accum + 1 : accum), 0);
 }
 
 /**
