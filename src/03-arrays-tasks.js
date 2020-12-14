@@ -101,8 +101,8 @@ function getArrayOfStrings(arr) {
  *    [ 1, 2, 3, 4, 5, 'false' ]         => [ 1, 2, 3, 4, 5, 'false' ]
  *    [ false, 0, NaN, '', undefined ]   => [ ]
  */
-function removeFalsyValues(/* arr */) {
-  throw new Error('Not implemented');
+function removeFalsyValues(arr) {
+  return arr.filter((item) => Boolean(item));
 }
 
 /**
@@ -116,8 +116,8 @@ function removeFalsyValues(/* arr */) {
  *    => [ 'PERMANENT-INTERNSHIP', 'GLUTINOUS-SHRIEK', 'MULTIPLICATIVE-ELEVATION' ],
  *    [ 'a', 'b', 'c', 'd', 'e', 'f', 'g' ]  => [ 'A', 'B', 'C', 'D', 'E', 'F', 'G' ]
  */
-function getUpperCaseStrings(/* arr */) {
-  throw new Error('Not implemented');
+function getUpperCaseStrings(arr) {
+  return arr.map((item) => item.toUpperCase());
 }
 
 
@@ -131,8 +131,8 @@ function getUpperCaseStrings(/* arr */) {
  *    [ '', 'a', 'bc', 'def', 'ghij' ]  => [ 0, 1, 2, 3, 4 ]
  *    [ 'angular', 'react', 'ember' ] => [ 7, 5, 5 ]
  */
-function getStringsLength(/* arr */) {
-  throw new Error('Not implemented');
+function getStringsLength(arr) {
+  return arr.map((item) => item.length);
 }
 
 /**
@@ -146,8 +146,9 @@ function getStringsLength(/* arr */) {
  *    [ 1, 3, 4, 5 ], 2, 1  => [ 1, 2, 3, 4, 5 ]
  *    [ 1, 'b', 'c'], 0, 'x'  => [ 'x', 1, 'b', 'c' ]
  */
-function insertItem(/* arr, item, index */) {
-  throw new Error('Not implemented');
+function insertItem(arr, item, index) {
+  arr.splice(index, 0, item);
+  return arr;
 }
 
 /**
@@ -160,8 +161,8 @@ function insertItem(/* arr, item, index */) {
  *    [ 1, 3, 4, 5 ], 2 => [ 1, 3 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'a', 'b', 'c' ]
  */
-function getHead(/* arr, n */) {
-  throw new Error('Not implemented');
+function getHead(arr, n) {
+  return arr.filter((item, i) => i < n);
 }
 
 
@@ -175,8 +176,8 @@ function getHead(/* arr, n */) {
  *    [ 1, 3, 4, 5 ], 2  => [ 4, 5 ]
  *    [ 'a', 'b', 'c', 'd'], 3  => [ 'b', 'c', 'd' ]
  */
-function getTail(/* arr, n */) {
-  throw new Error('Not implemented');
+function getTail(arr, n) {
+  return arr.reverse().filter((item, i) => i < n).reverse();
 }
 
 
@@ -235,10 +236,9 @@ function toArrayOfSquares(arr) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
 function getMovingSum(arr) {
-  return arr.map((item, i, curr) => {
-    if (curr[i - 1] === undefined) return item;
-    return item + curr[i - 1];
-  });
+  return arr
+    .reduce(((accumulator, current, i) => accumulator.concat(current + accumulator[i])),
+      [0]).slice(1);
 }
 
 /**
@@ -252,10 +252,9 @@ function getMovingSum(arr) {
  * [ 'a', 'b', 'c' , null ]  => [ "b", null ]
  * [ "a" ] => []
  */
-function getSecondItems(/* arr */) {
-  throw new Error('Not implemented');
+function getSecondItems(arr) {
+  return arr.filter((item, i) => (i + 1) % 2 === 0);
 }
-
 
 /**
  * Propagates every item in sequence its position times
@@ -271,8 +270,8 @@ function getSecondItems(/* arr */) {
  *  [ 'a', 'b', 'c', null ] => [ 'a', 'b','b', 'c','c','c',  null,null,null,null ]
  *  [ 1,2,3,4,5 ] => [ 1, 2,2, 3,3,3, 4,4,4,4, 5,5,5,5,5 ]
  */
-function propagateItemsByPositionIndex(/* arr */) {
-  throw new Error('Not implemented');
+function propagateItemsByPositionIndex(arr) {
+  return arr.reduce(((accum, curr, i) => accum.concat(Array(i + 1).fill(curr))), []);
 }
 
 
