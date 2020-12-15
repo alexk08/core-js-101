@@ -276,17 +276,18 @@ function isCreditCardNumber(ccn) {
   const ccnStr = ccn.toString();
   let sum = 0;
   for (let i = 0; i < ccnStr.length; i += 1) {
-    let cardNum = parseInt(ccnStr[i], 10);
+    let digit = parseInt(ccnStr[i], 10);
     if ((ccnStr.length - i) % 2 === 0) {
-      cardNum *= 2;
-      if (cardNum > 9) {
-        cardNum -= 9;
+      digit *= 2;
+      if (digit > 9) {
+        digit -= 9;
       }
     }
-    sum += cardNum;
+    sum += digit;
   }
   return sum % 10 === 0;
 }
+
 
 /**
  * Returns the digital root of integer:
@@ -302,8 +303,14 @@ function isCreditCardNumber(ccn) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const numArr = num.toString().split('');
+  let sum = 0;
+  numArr.forEach((item) => {
+    sum += Number(item);
+  });
+  if (sum > 9) return getDigitalRoot(sum);
+  return sum;
 }
 
 
@@ -353,8 +360,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -370,8 +377,27 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let matched = '';
+  const arr = [];
+  pathes.forEach((item, index, array) => {
+    matched = '';
+    if (index === array.length - 1) return;
+    const nextItem = array[index + 1];
+    const len = item.length <= nextItem ? item.length : nextItem.length;
+    for (let i = 0; i < len; i += 1) {
+      const letter1 = item[i];
+      const letter2 = nextItem[i];
+      if (letter1 !== letter2) {
+        arr.push(matched);
+        return;
+      }
+      matched += letter1;
+    }
+  });
+  const path = arr.reduce((prev, curr) => (prev === curr ? curr : ''));
+  const ind = path.lastIndexOf('/');
+  return path.slice(0, ind + 1);
 }
 
 
